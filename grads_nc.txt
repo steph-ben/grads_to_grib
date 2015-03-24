@@ -1,0 +1,136 @@
+#significant_wave_height (unit=m)
+'open grd2.ctl'
+'set t 1 last'
+'define hs=hs'
+'set sdfwrite waveheight.nc'
+'sdfwrite hs'
+'reinit'
+
+#wave direction (peak dir, unit=rad)
+'open grd2.ctl'
+'set t 1 last'
+'define peakd=peakd'
+'set sdfwrite -flt wavedir.nc'
+'sdfwrite peakd'
+'reinit'
+
+#wave period (unit= s)
+'open grd2.ctl'
+'set t 1 last'
+'define tmn=tmn'
+'set sdfwrite -flt waveperiod.nc'
+'sdfwrite tmn'
+'reinit'
+
+#wind sea height (unit=m)
+'open grd2.ctl'
+'set t 1 last'
+'define phs00=phs00'
+'set sdfwrite windsea.nc'
+'sdfwrite phs00'
+'reinit'
+
+#wind sea direction (unit= degree)
+'open grd2.ctl'
+'set t 1 last'
+'define pth00=pth00'
+'set sdfwrite windseadir.nc'
+'sdfwrite pth00'
+'reinit'
+
+#wind sea  period (unit=s)
+'open grd2.ctl'
+'set t 1 last'
+'define ptp00=ptp00'
+'set sdfwrite windseaper.nc'
+'sdfwrite ptp00'
+'reinit'
+
+
+#primary swell height (unit=m)
+'open grd2.ctl'
+'set t 1 last'
+'define phs01=phs01'
+'set sdfwrite primaryswell.nc'
+'sdfwrite phs01'
+'reinit'
+
+#primary swell direction (unit= degree)
+'open grd2.ctl'
+'set t 1 last'
+'define pth01=pth01'
+'set sdfwrite primaryswelldir.nc'
+'sdfwrite pth01'
+'reinit'
+
+#primary swell  period (unit=s)
+'open grd2.ctl'
+'set t 1 last'
+'define ptp01=ptp01'
+'set sdfwrite primaryswellperiod.nc'
+'sdfwrite ptp01'
+'reinit'
+
+#secondary swell height (unit=m)
+'open grd2.ctl'
+'set t 1 last'
+'define phs02=phs02'
+'set sdfwrite secondaryswell.nc'
+'sdfwrite phs02'
+'reinit'
+
+#primary swell direction (unit= degree)
+'open grd2.ctl'
+'set t 1 last'
+'define pth02=pth02'
+'set sdfwrite secondaryswelldir.nc'
+'sdfwrite pth02'
+'reinit'
+
+#primary swell  period (unit=s)
+'open grd2.ctl'
+'set t 1 last'
+'define ptp02=ptp02'
+'set sdfwrite secondaryswellperiod.nc'
+'sdfwrite ptp02'
+'reinit'
+
+#surface wind 10m
+'open grd2.ctl'
+'set t 1 last'
+'define wu=wu'
+'set sdfwrite windu.nc'
+'sdfwrite wu'
+'reinit'
+
+#surface wind 10m
+'open grd2.ctl'
+'set t 1 last'
+'define wv=wv'
+'set sdfwrite windv.nc'
+'sdfwrite wv'
+'reinit'
+
+#surface wind speed 10m (unit=knots)
+'open grd2.ctl'
+'set t 1 last'
+'uw=wu*1.94384449'
+'vw=wv*1.94384449'
+'mag=sqrt(uw*uw+vw*vw)'
+'wspd=mag'
+'define wspd=wspd'
+'set sdfwrite -flt windspeed.nc'
+'sdfwrite wspd'
+'reinit'
+
+#surface wind 10m direction (unit=degree)
+'open grd2.ctl'
+'set t 1 last'
+'dir=57.324*ATAN2(wv,wu)+180'
+'dirw=dir'
+'define dirw=dirw'
+'set sdfwrite -flt windir.nc'
+'sdfwrite dirw'
+'reinit'
+
+'quit'
