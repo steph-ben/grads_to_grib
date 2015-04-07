@@ -1,6 +1,7 @@
 #!/usr/bin/python
 """
 Convert WaveWatch3 model from Grads to GRIB
+Author: stephane.benchimol@mfi.fr
 
 Needed tools:
     - Grads
@@ -122,11 +123,11 @@ TRANSMET_PASS = "STRcb56p"
 
 class GradsToGrib():
     def run(self):
-        g.clean_directories()
-        g.grads_to_netcdf()
-        g.netcdf_to_grib()
+        self.clean_directories()
+        self.grads_to_netcdf()
+        self.netcdf_to_grib()
         #g.run_timestamp = datetime.datetime.strptime('2015-02-05T00:00:00', '%Y-%m-%dT%H:%M:%S')
-        g.merge_per_forecastrange()
+        self.merge_per_forecastrange()
 
     def clean_directories(self):
         for d in TMP_DIR, NETCDF_OUTDIR, GRIB_OUTDIR:
