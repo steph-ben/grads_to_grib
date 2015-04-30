@@ -283,8 +283,12 @@ class GradsToGrib():
             A2 = 'S'
         elif forecastrange > 199:
             A2 = 'T'
-
+            
         timestamp = self.run_timestamp.strftime('%Y%m%d%H%M%S')
+        if len(timestamp) == 12:
+            # This should not append, since strftime syntax seems good
+            timestamp = timestamp + "00"
+
         f = os.path.basename(filename)
         return 'T_%s%s%s_C_%s_%s_%s' % (TTA1, A2, ii, CCCC, timestamp, f)
 
