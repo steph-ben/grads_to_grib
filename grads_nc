@@ -9,9 +9,11 @@
 #wave direction (peak dir, unit=rad)
 'open grd2.ctl'
 'set t 1 last'
-'define peakd=peakd'
+#'define peakd=peakd'
+'wavedir=peakd*57.30+90'
+'define wavedir=wavedir'
 'set sdfwrite -flt wavedir.nc'
-'sdfwrite peakd'
+'sdfwrite wavedir'
 'reinit'
 
 #wave period (unit= s)
@@ -33,9 +35,11 @@
 #wind sea direction (unit= degree)
 'open grd2.ctl'
 'set t 1 last'
-'define pth00=pth00'
+#'define pth00=pth00'
+'wseadir=pth00*57.30+90'
+'define wseadir=wseadir'
 'set sdfwrite windseadir.nc'
-'sdfwrite pth00'
+'sdfwrite wseadir'
 'reinit'
 
 #wind sea  period (unit=s)
@@ -58,9 +62,11 @@
 #primary swell direction (unit= degree)
 'open grd2.ctl'
 'set t 1 last'
-'define pth01=pth01'
+#'define pth01=pth01'
+'pswelldir=pth01*57.30+90'
+'define pswelldir=pswelldir'
 'set sdfwrite primaryswelldir.nc'
-'sdfwrite pth01'
+'sdfwrite pswelldir'
 'reinit'
 
 #primary swell  period (unit=s)
@@ -79,15 +85,17 @@
 'sdfwrite phs02'
 'reinit'
 
-#primary swell direction (unit= degree)
+#secondary swell direction (unit= degree)
 'open grd2.ctl'
 'set t 1 last'
-'define pth02=pth02'
+#'define pth02=pth02'
+'sswelldir=pth02*57.30+90'
+'define sswelldir=sswelldir'
 'set sdfwrite secondaryswelldir.nc'
-'sdfwrite pth02'
+'sdfwrite sswelldir'
 'reinit'
 
-#primary swell  period (unit=s)
+#secondary swell  period (unit=s)
 'open grd2.ctl'
 'set t 1 last'
 'define ptp02=ptp02'

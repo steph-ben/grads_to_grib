@@ -80,32 +80,33 @@ WW3_GRIB_CODES = {
     'centre': 195,
     'subCentre': 0,
     'generatingProcessIdentifier': 201,
+    'timeRangeIndicator': 10
 }
 PARAMETERS_CODES = {
     'waveheight': 
-        {'indicatorOfParameter': 105},
+        {'indicatorOfParameter': 105, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'wavedir': 
-        {'indicatorOfParameter': 200},
+        {'indicatorOfParameter': 200, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'waveperiod': 
-        {'indicatorOfParameter': 201},
+        {'indicatorOfParameter': 201, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'windsea': 
-        {'indicatorOfParameter': 100},
+        {'indicatorOfParameter': 100, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'windseadir': 
-        {'indicatorOfParameter': 101},
+        {'indicatorOfParameter': 101, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'windseaper': 
-        {'indicatorOfParameter': 110},
+        {'indicatorOfParameter': 110, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'primaryswell': 
-        {'indicatorOfParameter': 202},
+        {'indicatorOfParameter': 202, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'primaryswelldir': 
-        {'indicatorOfParameter': 107},
+        {'indicatorOfParameter': 107, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'primaryswellperiod': 
-        {'indicatorOfParameter': 108},
+        {'indicatorOfParameter': 108, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'secondaryswell': 
-        {'indicatorOfParameter': 203},
+        {'indicatorOfParameter': 203, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'secondaryswelldir': 
-        {'indicatorOfParameter': 109},
+        {'indicatorOfParameter': 109, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'secondaryswellperiod': 
-        {'indicatorOfParameter': 110},
+        {'indicatorOfParameter': 110, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'windu': 
         {'indicatorOfParameter': 33, 'indicatorOfTypeOfLevel': '105', 'level':10},
     'windv': 
@@ -167,6 +168,7 @@ class GradsToGrib():
 
             print "\n *** Converting %s to %s ..." % (nc_file, grib_file)
             cmd = "%s -f grb copy %s %s" % (CDO_BIN, nc_file, grib_file)
+            print cmd
             run(cmd)
 
             if self.run_timestamp is None:
@@ -182,7 +184,7 @@ class GradsToGrib():
             #
             param_name, ext = os.path.splitext(os.path.basename(nc_file))
             if param_name not in PARAMETERS_CODES:
-                print('WARNING: GRIB code for parameters %s not defined' % param_name)
+                print('WARNING: GRIB code for parameters %s not defined, ignoring this parameter.' % param_name)
                 continue
             param_codes = PARAMETERS_CODES[param_name]
             grib_codes = WW3_GRIB_CODES
@@ -199,7 +201,7 @@ class GradsToGrib():
         args = ["%s=%s" % (k, v) for k, v, in grib_codes.items()]
         all = ','.join(args)
 
-        cmd = "%s -s %s %s %s" % (GRIB_SET_BIN, all, grib_file, grib_tmp_file)
+        cmd = "%s -r -s %s %s %s" % (GRIB_SET_BIN, all, grib_file, grib_tmp_file)
         run(cmd)
         shutil.move(grib_tmp_file, grib_file)
 
