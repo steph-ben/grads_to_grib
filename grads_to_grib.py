@@ -85,17 +85,17 @@ WW3_GRIB_CODES = {
 }
 PARAMETERS_CODES = {
     'waveheight': 
-        {'indicatorOfParameter': 105, 'indicatorOfTypeOfLevel': '102', 'level':0},
+        {'indicatorOfParameter': 100, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'wavedir': 
         {'indicatorOfParameter': 200, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'waveperiod': 
         {'indicatorOfParameter': 201, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'windsea': 
-        {'indicatorOfParameter': 100, 'indicatorOfTypeOfLevel': '102', 'level':0},
+        {'indicatorOfParameter': 102, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'windseadir': 
         {'indicatorOfParameter': 101, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'windseaper': 
-        {'indicatorOfParameter': 110, 'indicatorOfTypeOfLevel': '102', 'level':0},
+        {'indicatorOfParameter': 103, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'primaryswell': 
         {'indicatorOfParameter': 202, 'indicatorOfTypeOfLevel': '102', 'level':0},
     'primaryswelldir': 
