@@ -1,0 +1,32 @@
+Installation instructions
+==========================
+
+Environnement:
+# GRADS
+yum install grads
+
+# GCC
+yum install gcc
+yum install gcc-c++
+
+# NETCDF
+yum install netcdf
+yum install netcdf-devel
+
+
+# CDO
+wget https://code.zmaw.de/attachments/download/10994/cdo-current.tar.gz
+tar xvzf cdo-current.tar.gz
+./configure --with-netcdf=/usr
+make
+make install
+
+#GRIB-API
+ wget https://software.ecmwf.int/wiki/download/attachments/3473437/grib_api-1.14.0-Source.tar.gz?api=v2
+ tar xvzf grib_api-1.14.0-Source.tar.gz\?api\=v2
+./configure --prefix=/home/podeurd/netcdf2grib/grib_api_dir --disable-jpeg
+make
+make install
+
+#path for grib_set
+ export PATH=$PATH:/home/podeurd/netcdf2grib/grib_api_dir/bin/
