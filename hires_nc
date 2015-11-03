@@ -1,5 +1,5 @@
 #significant_wave_height (unit=m)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 'define hs=hs'
 'set sdfwrite waveheight.nc'
@@ -7,7 +7,7 @@
 'reinit'
 
 #wave direction (peak dir, unit=rad)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 #'define peakd=peakd'
 #'wavedir=peakd*57.30+90'
@@ -18,7 +18,7 @@
 'reinit'
 
 #wave period (unit= s)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 'define t01=t01'
 'set sdfwrite -flt waveperiod.nc'
@@ -26,7 +26,7 @@
 'reinit'
 
 #wind sea height (unit=m)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 'define phs00=phs00'
 'set sdfwrite windsea.nc'
@@ -34,7 +34,7 @@
 'reinit'
 
 #wind sea direction (unit= degree)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 #'define pth00=pth00'
 #'wseadir=pth00*57.30+90'
@@ -45,7 +45,7 @@
 'reinit'
 
 #wind sea  period (unit=s)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 'define ptp00=ptp00'
 'set sdfwrite windseaper.nc'
@@ -54,7 +54,7 @@
 
 
 #primary swell height (unit=m)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 'define phs01=phs01'
 'set sdfwrite primaryswell.nc'
@@ -62,7 +62,7 @@
 'reinit'
 
 #primary swell direction (unit= degree)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 #'define pth01=pth01'
 'pswelldir=-(pdi01*57.30+90)'
@@ -72,7 +72,7 @@
 'reinit'
 
 #primary swell  period (unit=s)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 'define ptp01=ptp01'
 'set sdfwrite primaryswellperiod.nc'
@@ -80,7 +80,7 @@
 'reinit'
 
 #secondary swell height (unit=m)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 'define phs02=phs02'
 'set sdfwrite secondaryswell.nc'
@@ -88,7 +88,7 @@
 'reinit'
 
 #secondary swell direction (unit= degree)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 #'define pth02=pth02'
 'sswelldir=-(pdi02*57.30+90)'
@@ -98,7 +98,7 @@
 'reinit'
 
 #secondary swell  period (unit=s)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 'define ptp02=ptp02'
 'set sdfwrite secondaryswellperiod.nc'
@@ -106,7 +106,7 @@
 'reinit'
 
 #surface wind 10m
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 'define wu=wu'
 'set sdfwrite windu.nc'
@@ -114,7 +114,7 @@
 'reinit'
 
 #surface wind 10m
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 'define wv=wv'
 'set sdfwrite windv.nc'
@@ -122,7 +122,7 @@
 'reinit'
 
 #surface wind speed 10m (unit=knots)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 'uw=wu*1.94384449'
 'vw=wv*1.94384449'
@@ -134,7 +134,7 @@
 'reinit'
 
 #surface wind 10m direction (unit=degree)
-'open grd2.ctl'
+'open hires.ctl'
 'set t 1 last'
 'dir=57.324*ATAN2(wv,wu)+180'
 'dirw=dir'

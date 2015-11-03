@@ -2,7 +2,7 @@ DSET      hires.grads
 TITLE     WAVEWATCH III gridded data
 OPTIONS   sequential
 OPTIONS   big_endian
-UNDEF      -999.9
+UNDEF     -999.9
 XDEF      881  LINEAR     90.00000     0.06250
 YDEF      481  LINEAR    -15.00000     0.06250
 ZDEF        1  LINEAR   1000.00000     1.00000

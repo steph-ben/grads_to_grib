@@ -74,7 +74,7 @@ if not find_executable(GRIB_SET_BIN): sys.exit('ERROR: Unable to find %s' % GRIB
 #
 # WW3 parameters and GRIB codes
 #
-MAX_FORECAST_RANGE = 168
+MAX_FORECAST_RANGE = 120
 FORECAST_RANGE_STEP = 3
 WW3_GRIB_CODES = {
     'table2Version': 2,
@@ -145,14 +145,18 @@ class GradsToGrib():
         Note that all codes will be empty (parameters, levels, etc)
         """
         print " *** Converting Grads to NetCDF ..."
-        run('%s -blc "run grads_nc"' % GRADS_BIN)
+        run('%s -blc "run hires_nc"' % GRADS_BIN)
 
         for nc_file in os.listdir('.'):
             if nc_file[-3:] == '.nc':
                 shutil.move(nc_file, NETCDF_OUTDIR)
 
         print "\n\n *** NetCDF files:"
-        for f in os.listdir(NETCDF_OUTDIR):
+        netcdf_list = os.listdir(NETCDF_OUTDIR)
+        if not netcdf_list:
+            print "ERROR: no NetCDF output in %s" % os.path.abspath(NETCDF_OUTDIR)
+            exit(-1)
+        for f in netcdf_list:
             print f
 
     def netcdf_to_grib(self):
@@ -223,9 +227,12 @@ class GradsToGrib():
                 "ww3.%s.%s.%s.grb" % (param_name, run_timestamp.strftime('%Y%m%d%H'), str(forecastrange).zfill(3))
             )
             cmd = GRIB_SET_BIN
-            if forecastrange == 3:
-                # Grads/cdo fill stepRange only for fcstRange=3, don't ask why ...
-                cmd += " -S -w dataDate=%s,dataTime=%s,stepRange=3" % (o_datadate, o_datatime)
+            if forecastrange == 0:
+                # Grads/cdo fill stepRange strangely for fcstRange=0 and fcstRange=0, don't ask why ...
+                cmd += " -S -w dataDate=%s,dataTime=%s,stepRange=0" % (o_datadate, t_datatime)
+                cmd += " -s dataDate=%s,dataTime=%s,stepRange=%s,indicatorOfUnitOfTimeRange=1" % (t_datadate, t_datatime, t_stepRange)
+            elif forecastrange == 3:
+                cmd += " -S -w dataDate=%s,dataTime=%s,stepRange=768" % (o_datadate, t_datatime)
                 cmd += " -s dataDate=%s,dataTime=%s,stepRange=%s" % (t_datadate, t_datatime, t_stepRange)
             else:
                 cmd += " -S -w dataDate=%s,dataTime=%s" % (o_datadate, o_datatime)
@@ -260,18 +267,20 @@ class GradsToGrib():
         """
         T_YXWR45_C_AWFA_20150323033956_wrfprs_d01_45_grb_11071.bin.tmp
         """
+        return
         destination_filename = self.get_header_from_filename(filename, forecastrange)
 
         print " *** Sending to FTP %s : %s" % (TRANSMET_HOST, destination_filename)
         log = ""
-        ftp = ftplib.FTP(TRANSMET_HOST, TRANSMET_USER, TRANSMET_PASS)
-        log += ftp.getwelcome() + "\n"
         try:
+            ftp = ftplib.FTP(TRANSMET_HOST, TRANSMET_USER, TRANSMET_PASS)
+            log += ftp.getwelcome() + "\n"
             ftp.cwd('.')
             log += ftp.storbinary('STOR %s.tmp' % (destination_filename), open(filename, 'rb')) + "\n"
             log += ftp.rename("%s.tmp" % destination_filename, "%s.bin" % destination_filename) + "\n"
-        finally:
             log += ftp.quit() + "\n"
+        except Exception, e:
+            print "Warning ! Transfert has failed: %s" % str(e)
         print log
 
     def get_header_from_filename(self, filename, forecastrange):
@@ -296,7 +305,7 @@ class GradsToGrib():
 
 
 def run(cmd):
-    #print cmd
+    print cmd
     p = subprocess.Popen(shlex.split(cmd), stdout=subprocess.PIPE)
     stdout, stderr = p.communicate()
     return p.returncode, stdout, stderr
