@@ -1,0 +1,146 @@
+#significant_wave_height (unit=m)
+'open grd2.ctl'
+'set t 1 last'
+'define hs=hs'
+'set sdfwrite waveheight.nc'
+'sdfwrite hs'
+'reinit'
+
+#wave direction (peak dir, unit=rad)
+'open grd2.ctl'
+'set t 1 last'
+#'define peakd=peakd'
+#'wavedir=peakd*57.30+90'
+'wavedir=-(dir*57.2958-90)+180'
+'define wavedir=wavedir'
+'set sdfwrite -flt wavedir.nc'
+'sdfwrite wavedir'
+'reinit'
+
+#wave period (unit= s)
+'open grd2.ctl'
+'set t 1 last'
+'define t01=t01'
+'set sdfwrite -flt waveperiod.nc'
+'sdfwrite t01'
+'reinit'
+
+#wind sea height (unit=m)
+'open grd2.ctl'
+'set t 1 last'
+'define phs00=phs00'
+'set sdfwrite windsea.nc'
+'sdfwrite phs00'
+'reinit'
+
+#wind sea direction (unit= degree)
+'open grd2.ctl'
+'set t 1 last'
+#'define pth00=pth00'
+#'wseadir=pth00*57.30+90'
+'wseadir=-(pdi00*57.30+90)'
+'define wseadir=wseadir'
+'set sdfwrite windseadir.nc'
+'sdfwrite wseadir'
+'reinit'
+
+#wind sea  period (unit=s)
+'open grd2.ctl'
+'set t 1 last'
+'define ptp00=ptp00'
+'set sdfwrite windseaper.nc'
+'sdfwrite ptp00'
+'reinit'
+
+
+#primary swell height (unit=m)
+'open grd2.ctl'
+'set t 1 last'
+'define phs01=phs01'
+'set sdfwrite primaryswell.nc'
+'sdfwrite phs01'
+'reinit'
+
+#primary swell direction (unit= degree)
+'open grd2.ctl'
+'set t 1 last'
+#'define pth01=pth01'
+'pswelldir=-(pdi01*57.30+90)'
+'define pswelldir=pswelldir'
+'set sdfwrite primaryswelldir.nc'
+'sdfwrite pswelldir'
+'reinit'
+
+#primary swell  period (unit=s)
+'open grd2.ctl'
+'set t 1 last'
+'define ptp01=ptp01'
+'set sdfwrite primaryswellperiod.nc'
+'sdfwrite ptp01'
+'reinit'
+
+#secondary swell height (unit=m)
+'open grd2.ctl'
+'set t 1 last'
+'define phs02=phs02'
+'set sdfwrite secondaryswell.nc'
+'sdfwrite phs02'
+'reinit'
+
+#secondary swell direction (unit= degree)
+'open grd2.ctl'
+'set t 1 last'
+#'define pth02=pth02'
+'sswelldir=-(pdi02*57.30+90)'
+'define sswelldir=sswelldir'
+'set sdfwrite secondaryswelldir.nc'
+'sdfwrite sswelldir'
+'reinit'
+
+#secondary swell  period (unit=s)
+'open grd2.ctl'
+'set t 1 last'
+'define ptp02=ptp02'
+'set sdfwrite secondaryswellperiod.nc'
+'sdfwrite ptp02'
+'reinit'
+
+#surface wind 10m
+'open grd2.ctl'
+'set t 1 last'
+'define wu=wu'
+'set sdfwrite windu.nc'
+'sdfwrite wu'
+'reinit'
+
+#surface wind 10m
+'open grd2.ctl'
+'set t 1 last'
+'define wv=wv'
+'set sdfwrite windv.nc'
+'sdfwrite wv'
+'reinit'
+
+#surface wind speed 10m (unit=knots)
+'open grd2.ctl'
+'set t 1 last'
+'uw=wu*1.94384449'
+'vw=wv*1.94384449'
+'mag=sqrt(uw*uw+vw*vw)'
+'wspd=mag'
+'define wspd=wspd'
+'set sdfwrite -flt windspeed.nc'
+'sdfwrite wspd'
+'reinit'
+
+#surface wind 10m direction (unit=degree)
+'open grd2.ctl'
+'set t 1 last'
+'dir=57.324*ATAN2(wv,wu)+180'
+'dirw=dir'
+'define dirw=dirw'
+'set sdfwrite -flt windir.nc'
+'sdfwrite dirw'
+'reinit'
+
+'quit'

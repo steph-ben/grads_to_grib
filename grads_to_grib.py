@@ -225,7 +225,7 @@ class GradsToGrib():
             cmd = GRIB_SET_BIN
             if forecastrange == 3:
                 # Grads/cdo fill stepRange only for fcstRange=3, don't ask why ...
-                cmd += " -S -w dataDate=%s,dataTime=%s,stepRange=3" % (o_datadate, t_datatime)
+                cmd += " -S -w dataDate=%s,dataTime=%s,stepRange=3" % (o_datadate, o_datatime)
                 cmd += " -s dataDate=%s,dataTime=%s,stepRange=%s" % (t_datadate, t_datatime, t_stepRange)
             else:
                 cmd += " -S -w dataDate=%s,dataTime=%s" % (o_datadate, o_datatime)
